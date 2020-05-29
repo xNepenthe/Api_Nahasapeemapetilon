@@ -4,12 +4,14 @@ const helmet = require('helmet');
 const homeRouter = require('./routes/homeRouter');
 const userRouter = require('./routes/userRouter');
 const aboutRouter = require ('./routes/aboutRouter');
+const errorMiddleware = require ('./middlewares/errorMiddleware');
 
-app.use(helmet())
+app.use(helmet());
 
-//app.use('/', homeRouter);
+app.use('/', homeRouter);
 app.use('/user', userRouter);
-//app.use('/about', aboutRouter);
+app.use('/about', aboutRouter);
+app.use(errorMiddleware);
 
 app.listen(3000, () => {
     try {

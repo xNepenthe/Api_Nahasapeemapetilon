@@ -1,11 +1,15 @@
 const joi = require('@hapi/joi');
 
 const schemaParams = joi.object({
-
+    id: joi.string().alphanum().min(4).max(20).messages({
+        'string.base': 'Debe ser texto.',
+        'string.alphanum': 'Solamente letras y numeros.',
+        'string.empty': 'No puede quedar vacio.'
+    })
 })
 
 const schemaQuery = joi.object({
-    
+    last_name: joi.string().required()
 })
 
 const schemaBody = joi.object({
@@ -20,7 +24,7 @@ const schemaBody = joi.object({
 
 const schemaHeader = joi.object();
 
-async function validateRequest(req, res, next) { 
+async function validatePost(req, res, next) { 
     try {
         await schemaBody.validateAsync(req.body);
         next();
@@ -29,4 +33,17 @@ async function validateRequest(req, res, next) {
     }
 }
 
-module.exports = validateRequest;
+async function validateGet(req, res, next) { 
+    try {
+        await schemaParams.validateAsync(req.params);
+        await schemaQuery.validateAsync(req.query);
+        next();
+    } catch (err) {
+        next(err)
+    }
+}
+
+module.exports = {
+    validatePost,
+    validateGet
+};

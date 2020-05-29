@@ -7,9 +7,9 @@ const aboutRouter = require ('./routes/aboutRouter');
 
 app.use(helmet())
 
-app.use('/', homeRouter);
+//app.use('/', homeRouter);
 app.use('/user', userRouter);
-app.use('/about', aboutRouter);
+//app.use('/about', aboutRouter);
 
 app.listen(3000, () => {
     try {

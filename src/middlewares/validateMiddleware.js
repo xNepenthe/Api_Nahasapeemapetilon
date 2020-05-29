@@ -1,5 +1,13 @@
 const joi = require('@hapi/joi');
 
+const schemaParams = joi.object({
+
+})
+
+const schemaQuery = joi.object({
+    
+})
+
 const schemaBody = joi.object({
     name: joi.string().alphanum().min(3).max(20).required().messages({
         'string.base': 'El campo "Name" debe ser un texto.',

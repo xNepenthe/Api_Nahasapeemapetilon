@@ -6,6 +6,7 @@ const userRouter = require('./routes/userRouter');
 const aboutRouter = require ('./routes/aboutRouter');
 const errorMiddleware = require ('./middlewares/errorMiddleware');
 
+app.use(express.json());
 app.use(helmet());
 
 app.use('/', homeRouter);
